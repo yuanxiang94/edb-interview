@@ -13,9 +13,9 @@ import PersonIcon from '@material-ui/icons/PersonSharp';
 import WebIcon from '@material-ui/icons/WebSharp';
 import LanguageIcon from '@material-ui/icons/LanguageSharp';
 import Divider from '@material-ui/core/Divider';
-import Styles from '../styles/DataItemStyle';
+import Styles from '../styles/RepositoryItemStyle';
 
-const DataItem = (props) => {
+const RepositoryItem = (props) => {
     const classes = Styles();
     const [expanded, setExpanded] = useState(false);
 
@@ -63,4 +63,4 @@ const DataItem = (props) => {
     )
 }
 
-export default DataItem;
+export default RepositoryItem;

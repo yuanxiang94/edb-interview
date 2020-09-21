@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
       [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(3),
-        width: 'auto',
       },
     },
     searchIcon: {
@@ -27,10 +26,10 @@ const useStyles = makeStyles((theme) => ({
     },
     inputRoot: {
       color: 'inherit',
+      width: '100%',
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
       transition: theme.transitions.create('width'),
       width: '100%',
@@ -38,6 +37,18 @@ const useStyles = makeStyles((theme) => ({
         width: '50ch',
       },
     },
+    formControl: {
+      margin: theme.spacing(1),
+    },
+    select: {
+      color: 'white',
+    },
+    inputLabel: {
+      color: 'lightseagreen !important',
+    },
+    searchButton: {
+      margin: theme.spacing(1),
+    }
 }));
 
 export default useStyles;

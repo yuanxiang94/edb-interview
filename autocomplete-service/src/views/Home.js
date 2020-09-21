@@ -5,25 +5,34 @@ import axios from 'axios';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 const Home = () => {
-    const [searchKeyword, setSearchKeyword] = useState(undefined);
+    const [searchKey, setSearchKey] = useState(undefined);
     const [loading, setLoading] = useState(false);
     const [receivedData, setReceivedData] = useState(undefined);
 
-    const search = (keyword) => {
-        setSearchKeyword(keyword);
+    const searchKeyChange = (searchKey) => {
+        console.log(searchKey);
+        setSearchKey({
+            keyword: searchKey.keyword,
+            type: searchKey.type
+        });
     }
 
     useEffect(() => {
         const fetchData = async () => {
-            if (!searchKeyword) return;
+    
+            if (!searchKey) return;
+            console.log('start fetching data: ' + searchKey.keyword)
 
             const baseUri = 'http://localhost:9000/search';
-            const url = `${baseUri}/repositories/${searchKeyword}`;
+            const url = `${baseUri}/${searchKey.type}/${searchKey.keyword}`;
+            console.log('start fetching data: ' + url)
 
             setLoading(true);
 
             await axios.get(url).then(res => {
-                setReceivedData(res.data);
+                setReceivedData({
+                    type: searchKey.type, 
+                    data: res.data});
                 setLoading(false);
             }).catch(() => {
                 setLoading(false);
@@ -31,13 +40,19 @@ const Home = () => {
         };
      
         fetchData();
-      }, [searchKeyword]);
+      }, [searchKey]);
 
     return(
         <div>
-            <SearchBar onSearch={search}/>
+            <SearchBar 
+                onSearchKeyChange={searchKeyChange}
+            />
             { loading && <LinearProgress color='secondary'></LinearProgress> }
-            { receivedData !== undefined && <DataList data={receivedData} /> }
+            { receivedData !== undefined && 
+                <DataList 
+                    data={receivedData} 
+                /> 
+            }
         </div>
     )
 }

@@ -6,24 +6,41 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import Styles from '../styles/SearchBarStyle';
 import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const SearchBar = (props) => {
     const classes = Styles();
 
-    const [searchKey, setSearchKey] = useState('');
+    const [searchKey, setSearchKey] = useState({
+        keyword: '',
+        type: 'repositories'
+    });
 
     const keyPressed = (event) => {
         if(event.keyCode === 13) {
-           props.onSearch(searchKey);
+           props.onSearchKeyChange(searchKey);
         }
     }
 
-    const onChange = (event) => {
-        setSearchKey(event.target.value);
+    const onSearchKeyChange = (event) => {
+        setSearchKey({
+            ...searchKey,
+            keyword: event.target.value
+        });
     }
 
     const buttonPressed = () => {
-        props.onSearch(searchKey);
+        props.onSearchKeyChange(searchKey);
+    }
+
+    const onSearchTypeChange = (event) => {
+        setSearchKey({
+            ...searchKey,
+            type: event.target.value
+        });
     }
 
     return(
@@ -44,12 +61,27 @@ const SearchBar = (props) => {
                         }}
                         inputProps={{ 'aria-label': 'search' }}
                         onKeyDown={(e) => keyPressed(e)}
-                        onChange={(e) => onChange(e)}
+                        onChange={(e) => onSearchKeyChange(e)}
                     />
                 </div>
-                <Button variant='contained' color='primary' onClick={buttonPressed}>
-                    Search
-                </Button>    
+                <div className={classes.formControl}>
+                    <FormControl variant='filled'>
+                        <InputLabel className={classes.inputLabel}>Type</InputLabel>
+                        <Select
+                        className={classes.select}
+                        value={searchKey.type}
+                        onChange={(e) => onSearchTypeChange(e)}
+                        >
+                            <MenuItem value='repositories'>Repositories</MenuItem>
+                            <MenuItem value='users'>Users</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
+                <div className={classes.searchButton}>
+                    <Button variant='contained' color='primary' onClick={buttonPressed}>
+                        Search
+                    </Button>
+                </div>
             </Toolbar>
                 
         </AppBar>            
