@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useCallback } from "react";
+import debounce from "lodash.debounce";
 // Material
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -19,10 +20,22 @@ const SearchBar = (props) => {
   const { searchKey, onSearchKeyChange, onButtonPressed } = props;
   const { type } = searchKey;
 
+  const debouncedSearch = useCallback(
+    debounce(
+      (value, type) => onSearchKeyChange({ keyword: value, type: type }),
+      500
+    ),
+    []
+  );
+
   const onKeyPressed = (event) => {
     if (event.keyCode === 13) {
       onButtonPressed();
     }
+  };
+
+  const onKeywordChange = (e) => {
+    debouncedSearch(e.target.value, type);
   };
 
   return (
@@ -41,9 +54,7 @@ const SearchBar = (props) => {
             }}
             inputProps={{ "aria-label": "search" }}
             onKeyDown={(e) => onKeyPressed(e)}
-            onChange={(e) =>
-              onSearchKeyChange({ ...searchKey, keyword: e.target.value })
-            }
+            onChange={onKeywordChange}
           />
         </div>
         <div className={classes.formControl}>
@@ -58,7 +69,7 @@ const SearchBar = (props) => {
             >
               <MenuItem value="repositories">Repositories</MenuItem>
               <MenuItem value="users">Users</MenuItem>
-            </Select>{" "}
+            </Select>
           </FormControl>
         </div>
         <div className={classes.searchButton}>
