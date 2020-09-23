@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // Material
 import LinearProgress from "@material-ui/core/LinearProgress";
 // Components
-import { DataList, SearchBar } from "../components/";
+import { DataList, SearchBar, StatusDisplay } from "../components/";
 // Utils
 import { api } from "../utils/api";
 
@@ -12,7 +12,12 @@ const Home = () => {
     type: "repositories",
   });
   const [loading, setLoading] = useState(false);
-  const [receivedData, setReceivedData] = useState(undefined);
+  const [receivedData, setReceivedData] = useState({
+    type: null,
+    response: null,
+    total: 0,
+    error: null,
+  });
 
   const searchKeyChange = (searchKey) => {
     setSearchKey({
@@ -36,12 +41,18 @@ const Home = () => {
       })
       .then((res) => {
         setReceivedData({
+          receivedData,
           type: searchKey.type,
           response: res.data,
+          total: res.data.total_count,
         });
         setLoading(false);
       })
       .catch((e) => {
+        setReceivedData({
+          ...receivedData,
+          error: e,
+        });
         setLoading(false);
       });
   };
@@ -54,7 +65,12 @@ const Home = () => {
         searchKey={searchKey}
       />
       {loading && <LinearProgress color="secondary"></LinearProgress>}
-      {receivedData !== undefined && <DataList datalist={receivedData} />}
+      {receivedData.total !== 0 && <DataList datalist={receivedData} />}
+      {(receivedData.response != null ||
+        receivedData.total === 0 ||
+        receivedData.error != null) && (
+        <StatusDisplay receivedData={receivedData} />
+      )}
     </div>
   );
 };
