@@ -1,6 +1,6 @@
 import { fade, makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const SearchBarStyle = makeStyles((theme) => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -58,4 +58,4 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default useStyles;
+export { SearchBarStyle };

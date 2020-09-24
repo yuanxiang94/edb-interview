@@ -9,10 +9,10 @@ import Avatar from "@material-ui/core/Avatar";
 import WebIcon from "@material-ui/icons/WebSharp";
 import Link from "@material-ui/core/Link";
 // Styles
-import Styles from "../styles/CommitItemStyle";
+import { CommitItemStyle } from "../styles/CommitItemStyle";
 
 const CommitItem = (props) => {
-  const classes = Styles();
+  const classes = CommitItemStyle();
 
   // Declare Props
   const { item } = props;

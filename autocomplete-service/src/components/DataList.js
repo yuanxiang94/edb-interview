@@ -4,10 +4,10 @@ import { RepositoryItem, UserItem, CommitItem } from "./";
 // Material
 import Container from "@material-ui/core/Container";
 // Styles
-import Styles from "../styles/DataListStyle";
+import { DataListStyle } from "../styles/DataListStyle";
 
 const DataList = (props) => {
-  const classes = Styles();
+  const classes = DataListStyle();
 
   const { datalist, onRepoSelected } = props;
   const { type, response } = datalist;

@@ -50,9 +50,6 @@ const Home = () => {
         },
       })
       .then((res) => {
-        if (searchKey.type === "commits") {
-          console.log(res);
-        }
         setReceivedData({
           receivedData,
           type: searchKey.type,

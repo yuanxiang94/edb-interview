@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
 
-const useStyles = makeStyles((theme) => ({
+const CommitItemStyle = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(2),
   },
@@ -18,4 +18,4 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default useStyles;
+export { CommitItemStyle };

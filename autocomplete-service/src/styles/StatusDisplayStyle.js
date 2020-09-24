@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const StatusDisplayStyle = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
     display: "flex",
@@ -20,4 +20,4 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default useStyles;
+export { StatusDisplayStyle };

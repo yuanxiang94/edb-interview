@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const RepositoryItemStyle = makeStyles((theme) => ({
   root: {
     width: "100%",
   },
@@ -24,4 +24,4 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default useStyles;
+export { RepositoryItemStyle };

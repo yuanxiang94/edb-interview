@@ -17,10 +17,10 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 
 // Styles
-import Styles from "../styles/RepositoryItemStyle";
+import { RepositoryItemStyle } from "../styles/RepositoryItemStyle";
 
 const RepositoryItem = (props) => {
-  const classes = Styles();
+  const classes = RepositoryItemStyle();
 
   // Declare Props
   const { item, onRepoSelected } = props;

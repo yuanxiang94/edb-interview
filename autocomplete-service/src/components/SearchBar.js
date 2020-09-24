@@ -6,16 +6,17 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
-import Styles from "../styles/SearchBarStyle";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import Chip from "@material-ui/core/Chip";
+// Style
+import { SearchBarStyle } from "../styles/SearchBarStyle";
 
 const SearchBar = (props) => {
-  const classes = Styles();
+  const classes = SearchBarStyle();
 
   // Declare Props
   const {

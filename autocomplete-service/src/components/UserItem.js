@@ -9,10 +9,10 @@ import Avatar from "@material-ui/core/Avatar";
 import WebIcon from "@material-ui/icons/WebSharp";
 import Link from "@material-ui/core/Link";
 // Styles
-import Styles from "../styles/UserItemStyle";
+import { UserItemStyle } from "../styles/UserItemStyle";
 
 const UserItem = (props) => {
-  const classes = Styles();
+  const classes = UserItemStyle();
 
   // Declare Props
   const { item } = props;
