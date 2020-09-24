@@ -1,4 +1,9 @@
 # edb-interview
+Auto Complete is a web application for searching GitHub repositories, users or commits with the use of GitHub API.
+
+It is developed by the following stacks:
+- *(frontend)* **React**
+- *(backend)* **Express**
 
 ## Installation
 Please follow the below instructions to setup the application.
