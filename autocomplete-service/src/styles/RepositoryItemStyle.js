@@ -16,6 +16,12 @@ const useStyles = makeStyles((theme) => ({
   repoDetails: {
     display: "flex",
   },
+  searchContainer: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    padding: theme.spacing(3),
+  },
 }));
 
 export default useStyles;

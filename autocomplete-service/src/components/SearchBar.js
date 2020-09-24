@@ -12,17 +12,33 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
+import Chip from "@material-ui/core/Chip";
 
 const SearchBar = (props) => {
   const classes = Styles();
 
   // Declare Props
-  const { searchKey, onSearchKeyChange, onButtonPressed } = props;
-  const { type } = searchKey;
+  const {
+    searchKey,
+    onSearchKeyChange,
+    onSearchRepositoryChange,
+    onButtonPressed,
+  } = props;
+  const { type, repository } = searchKey;
+
+  let searchLabel = "Search…";
+
+  if (repository != null)
+    searchLabel = `Search for Commits in Repository ${repository}`;
 
   const debouncedSearch = useCallback(
     debounce(
-      (value, type) => onSearchKeyChange({ keyword: value, type: type }),
+      (value, type, repository) =>
+        onSearchKeyChange({
+          keyword: value,
+          type: type,
+          repository: repository,
+        }),
       500
     ),
     []
@@ -35,7 +51,7 @@ const SearchBar = (props) => {
   };
 
   const onKeywordChange = (e) => {
-    debouncedSearch(e.target.value, type);
+    debouncedSearch(e.target.value, type, repository);
   };
 
   return (
@@ -47,7 +63,7 @@ const SearchBar = (props) => {
             <SearchIcon />
           </div>
           <InputBase
-            placeholder="Search…"
+            placeholder={searchLabel}
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput,
@@ -57,21 +73,41 @@ const SearchBar = (props) => {
             onChange={onKeywordChange}
           />
         </div>
-        <div className={classes.formControl}>
-          <FormControl variant="filled">
-            <InputLabel className={classes.inputLabel}>Type</InputLabel>
-            <Select
-              className={classes.select}
-              value={type}
-              onChange={(e) =>
-                onSearchKeyChange({ ...searchKey, type: e.target.value })
+        {repository != null && (
+          <div className={classes.repositoryContainer}>
+            <Typography noWrap variant="caption">
+              Search for Commits in
+            </Typography>
+            <Chip
+              className={classes.repositoryChip}
+              label={repository}
+              onDelete={() =>
+                onSearchRepositoryChange({
+                  repository: null,
+                  type: "repositories",
+                })
               }
-            >
-              <MenuItem value="repositories">Repositories</MenuItem>
-              <MenuItem value="users">Users</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
+            />
+          </div>
+        )}
+        {repository == null && (
+          <div className={classes.formControl}>
+            <FormControl variant="filled">
+              <InputLabel className={classes.inputLabel}>Type</InputLabel>
+              <Select
+                className={classes.select}
+                value={type}
+                onChange={(e) =>
+                  onSearchKeyChange({ ...searchKey, type: e.target.value })
+                }
+              >
+                <MenuItem value="repositories">Repositories</MenuItem>
+                <MenuItem value="users">Users</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+        )}
+
         <div className={classes.searchButton}>
           <Button variant="contained" color="primary" onClick={onButtonPressed}>
             Search

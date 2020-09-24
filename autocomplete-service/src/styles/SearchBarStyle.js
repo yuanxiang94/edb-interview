@@ -49,6 +49,13 @@ const useStyles = makeStyles((theme) => ({
   searchButton: {
     margin: theme.spacing(1),
   },
+  repositoryContainer: {
+    display: "flex",
+    alignItems: "center",
+  },
+  repositoryChip: {
+    marginLeft: theme.spacing(1),
+  },
 }));
 
 export default useStyles;

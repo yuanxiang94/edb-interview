@@ -14,6 +14,8 @@ import PersonIcon from "@material-ui/icons/PersonSharp";
 import WebIcon from "@material-ui/icons/WebSharp";
 import LanguageIcon from "@material-ui/icons/LanguageSharp";
 import Divider from "@material-ui/core/Divider";
+import Button from "@material-ui/core/Button";
+
 // Styles
 import Styles from "../styles/RepositoryItemStyle";
 
@@ -21,7 +23,7 @@ const RepositoryItem = (props) => {
   const classes = Styles();
 
   // Declare Props
-  const { item } = props;
+  const { item, onRepoSelected } = props;
   const { full_name, description, owner, html_url, language } = item;
 
   const [expanded, setExpanded] = useState(false);
@@ -68,6 +70,17 @@ const RepositoryItem = (props) => {
               <ListItemText primary="Language" secondary={language} />
             </ListItem>
           </List>
+        </div>
+        <div className={classes.searchContainer}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() =>
+              onRepoSelected({ repository: full_name, type: "commits" })
+            }
+          >
+            Search for Commits
+          </Button>
         </div>
       </AccordionDetails>
     </Accordion>

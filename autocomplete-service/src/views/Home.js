@@ -8,8 +8,9 @@ import { api } from "../utils/api";
 
 const Home = () => {
   const [searchKey, setSearchKey] = useState({
-    keyword: undefined,
+    keyword: null,
     type: "repositories",
+    repository: null,
   });
   const [loading, setLoading] = useState(false);
   const [receivedData, setReceivedData] = useState({
@@ -27,8 +28,16 @@ const Home = () => {
     });
   };
 
+  const searchRepositoryChange = (values) => {
+    setSearchKey({
+      ...searchKey,
+      repository: values.repository,
+      type: values.type,
+    });
+  };
+
   const search = () => {
-    if (searchKey.keyword === undefined || searchKey.keyword === "") return;
+    if (searchKey.keyword == null || searchKey.keyword === "") return;
 
     setLoading(true);
 
@@ -37,9 +46,13 @@ const Home = () => {
         params: {
           type: searchKey.type,
           keyword: searchKey.keyword,
+          repository: searchKey.repository,
         },
       })
       .then((res) => {
+        if (searchKey.type === "commits") {
+          console.log(res);
+        }
         setReceivedData({
           receivedData,
           type: searchKey.type,
@@ -61,11 +74,17 @@ const Home = () => {
     <div>
       <SearchBar
         onSearchKeyChange={searchKeyChange}
+        onSearchRepositoryChange={searchRepositoryChange}
         onButtonPressed={search}
         searchKey={searchKey}
       />
       {loading && <LinearProgress color="secondary"></LinearProgress>}
-      {receivedData.total !== 0 && <DataList datalist={receivedData} />}
+      {receivedData.total !== 0 && (
+        <DataList
+          datalist={receivedData}
+          onRepoSelected={searchRepositoryChange}
+        />
+      )}
       {(receivedData.response != null ||
         receivedData.total === 0 ||
         receivedData.error != null) && (
