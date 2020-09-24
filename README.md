@@ -20,7 +20,7 @@ npm start
 ```bash
 npm start
 ```
-> The application will be running at *localhost:3000*
+> The application will be running at *localhost:3000*.
 
 
 ## Features
@@ -33,14 +33,14 @@ npm start
 ![repository-screen](https://github.com/yuanxiang94/edb-interview/blob/master/feature-images/search-repository-screen.PNG)
 
 - **Search for GitHub users**
-> You may do so after changing the search type selector to *Users*
+> You may do so after changing the search type selector to *Users*.
 
 ![user-screen](https://github.com/yuanxiang94/edb-interview/blob/master/feature-images/search-user-screen.PNG)
 
 - **Search for GitHub commits**
-> You may do so after selecting a specific repository to search for commits
+> You may do so after selecting a specific repository to search for commits.
 
-> You may go back to search for repository or user after removing the selected repository
+> You may go back to search for repository or user after removing the selected repository.
 
 ![commit-screen](https://github.com/yuanxiang94/edb-interview/blob/master/feature-images/search-commit-screen.PNG)
 
